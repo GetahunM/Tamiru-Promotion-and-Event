@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport" content="width=1200, initial-scale=1, shrink-to-fit=no">
   <title>Tamiru Promotions | Excellence in Events</title>
   <link rel="stylesheet" href="style.css">
   <style>
@@ -15,10 +15,12 @@ html, body {
     padding: 0;
 }
 
+
 body {
-    display: flex;
-    flex-direction: column;
+    margin: 0;
+    padding: 0;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 .main-content {
     flex: 1;
@@ -89,21 +91,20 @@ section {
 /* --- FIXED 3-COLUMN GRID (NO HORIZONTAL SCROLL) --- */
 /* --- THE MASTER WRAPPER FIX --- */
 .container, .wrapper {
-    width: 1200px !important;
-    max-width: 1200px !important;
-    margin: 0 auto !important;
-    padding: 0 !important; /* Removes side padding that cuts the 3rd card */
-    overflow: hidden; 
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
 /* --- THE 3-CARD GRID (ZERO HORIZONTAL SCROLL) --- */
 .service-boxes, .cards, .testimonial-cards {
     display: grid !important;
     /* This divides 1200px into 3 exact columns minus the 20px gaps */
-    grid-template-columns: repeat(3, 1fr) !important; 
+
     gap: 20px;
-    width: 100% !important;
-    margin: 0 auto !important;
+
+width: 100% !important;
     padding: 40px 0 !important;
     
     /* Disables all side movement */
@@ -111,11 +112,24 @@ section {
     overflow-y: visible !important;
     box-sizing: border-box !important;
 }
+@media (max-width: 900px) {
+  .service-boxes,
+  .cards,
+  .testimonial-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
+@media (max-width: 600px) {
+  .service-boxes,
+  .cards,
+  .testimonial-cards {
+    grid-template-columns: 1fr;
+  }
+}
 /* --- UNIFIED CARD SIZE --- */
 .service-box, .card, .testimonial-card {
-    width: 100% !important; /* Automatically becomes ~386px */
-    background: #ffffff;
+  width: 100%; 
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     box-sizing: border-box !important;
@@ -139,18 +153,17 @@ section {
 /* --- THE OUTER FOOTER (Full Width & Dark) --- */
 .site-end-section {
     background: linear-gradient(180deg, #131b4d 0%, #0a0e29 100%) !important; /* Deep Dark Blue */
-    width: 100vw !important;
+ width: 100%;
     position: relative;
-    left: 50%;
-    margin-left: -50vw !important;
-    padding: 60px 0 0 0;
+
+ padding: 60px 0 0 0;
     border-top: 4px solid #ff7a00; /* Your Brand Orange */
     color: white;
 }
 
 /* --- THE INNER GRID (Centered) --- */
 .master-footer-grid {
-    width: 1200px !important;
+  width: 100%;
     margin: 0 auto !important;
     display: flex !important;
     flex-direction: row !important;
@@ -200,7 +213,7 @@ section {
 /* --- BOTTOM BAR --- */
 .legal-bottom-bar {
     background: #050714 !important; /* Pure Dark for the bottom */
-    width: 100vw !important;
+ width: 100%;
     position: relative;
     left: 50%;
     margin-left: -50vw !important;
@@ -276,7 +289,7 @@ html {
 }
   </style>
 </head>
-<body>
+
 <body>
 <div class="main-content">
 <header id="mainHeader">

@@ -844,3 +844,34 @@ nav a:hover {
     transform: rotate(45deg);
     color: #555;
 }
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+/* Tablet */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .card {
+    width: 90%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 22px;
+  }
+
+  .menu {
+    flex-direction: column;
+  }
+}
