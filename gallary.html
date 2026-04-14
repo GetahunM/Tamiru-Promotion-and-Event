@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Tamiru Promotion</title>
+
+    <style>
+        :root {
+           color: #1e2a78;
+            --brand-orange: #ff7a00;
+            --bg-light: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body {
+            background: var(--bg-light);
+            color: #333;
+            min-width: 1200px;
+        }
+
+        .top-bar {
+            width: 100%;
+            background: #fff;
+            padding: 15px 50px;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .back-home {
+            text-decoration: none;
+            color: var(--brand-blue);
+            font-weight: bold;
+        }
+
+        .gallery-header {
+            background: var(--brand-blue);
+            padding: 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .tabs-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: -20px;
+            border-radius: 50%;
+            
+        }
+
+     .tab-btn {
+    background: transparent;
+    color: #c5a059; /* Brand Gold */
+    border: 2px solid #c5a059;
+    padding: 15px 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+}
+
+       .tab-btn.active {
+    background: #c5a059;
+    color: #0f172a; /* Text becomes dark when background is gold */
+    box-shadow: 0 0 25px rgba(197, 160, 89, 0.4);
+}
+
+        .tab-btn:first-child {
+            border-radius: 50px 0 0 50px;
+        }
+
+        .tab-btn:last-child {
+            border-radius: 0 50px 50px 0;
+        }
+
+        .container {
+            width: 1200px;
+            margin: 40px auto;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .media-item {
+            height: 280px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #ddd;
+        }
+
+        .media-item img,
+        .media-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .extra-action-bar {
+            background: #fff;
+            padding: 40px;
+            text-align: center;
+            border-top: 5px solid var(--brand-orange);
+            margin-top: 50px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--brand-orange);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+        }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background:var(--bg-light);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 5000;
+        }
+.lightbox-content {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+        .lightbox.active {
+            display: flex;
+        }
+    .our{
+        text-align: center;
+      color: #1e2a78; /* Your brand blue */
+  font-size: 20px;
+        padding-bottom: 45px;
+    }
+        .lightbox-content {
+            max-width: 85%;
+            max-height: 85%;
+        }
+        .lightbox span {
+  font-size: 30px;   /* increase size */
+  color:black;
+  cursor: pointer;
+  user-select: none;
+  padding: 10px;
+}
+    
+    </style>
+</head>
+
+<body>
+
+<div class="top-bar">
+    <a href="index.html" class="back-home">❮ RETURN TO HOME</a>
+</div>
+
+<header class="gallaar">
+    <h1 class="our">Our Gallery</h1>
+</header>
+
+<div class="tabs-wrapper">
+    <button class="tab-btn active" onclick="switchTab('photo')">Photo Gallery</button>
+    <button class="tab-btn" onclick="switchTab('video')">Video Gallery</button>
+</div>
+
+<div class="container">
+    <div id="photo-grid" class="media-grid"></div>
+
+    <!-- ✅ VIDEO GRID FIXED -->
+    <div id="video-grid" class="media-grid" style="display:none;">
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video1.MP4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video2.MP4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video4.MOV" type="video/mp4">
+            </video>
+        </div>
+ <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video3.MOV" type="video/mp4">
+            </video>
+        </div>
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video3.MOV" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video4.MOV" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video3.MOV" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video2.MP4" type="video/mp4">
+            </video>
+        </div>
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video2.MP4" type="video/mp4">
+            </video>
+        </div>
+        
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video2.MP4" type="video/mp4">
+            </video>
+        </div>
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video2.MP4" type="video/mp4">
+            </video>
+        </div>
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video2.MP4" type="video/mp4">
+            </video>
+        </div>
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video2.MP4" type="video/mp4">
+            </video>
+        </div>
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video2.MP4" type="video/mp4">
+            </video>
+        </div>
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video2.MP4" type="video/mp4">
+            </video>
+        </div>
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video2.MP4" type="video/mp4">
+            </video>
+        </div>
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video2.MP4" type="video/mp4">
+            </video>
+        </div>
+<div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video2.MP4" type="video/mp4">
+            </video>
+        </div>
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video1.MP4" type="video/mp4">
+            </video>
+        </div>
+<div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video1.MP4" type="video/mp4">
+            </video>
+        </div>
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video2.MP4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video1.MP4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video4.MOV" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="media-item">
+            <video muted loop playsinline preload="metadata">
+                <source src="video/video2.MP4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+
+<section class="extra-action-bar">
+    <h2>Ready to plan your next event?</h2>
+    <a href="book.html#contact" class="cta-button">BOOK NOW</a>
+</section>
+<div id="lightbox" class="lightbox">
+    <span class="close" onclick="closeLightbox()">✖</span>
+    <span class="prev" onclick="changeSlide(-1)">❮</span>
+
+    <img id="lb-img" class="lightbox-content">
+
+    <span class="next" onclick="changeSlide(1)">❯</span>
+</div>
+
+<script>
+    const photos = [
+        'images/stage1.jpg',
+        'images/stage3.jpg',
+        'images/education7.jpg',
+        'images/eeducation4.jpg',
+        'images/wed7.jpg'
+    ];
+
+    let photoData = [];
+    let currentIndex = 0;
+
+    function initGallery() {
+        const pGrid = document.getElementById('photo-grid');
+
+        for (let i = 0; i < 40; i++) {
+            let src = photos[i % photos.length];
+            photoData.push(src);
+
+           pGrid.innerHTML += `
+    <div class="media-item">
+        <img src="${src}" onclick="openLightbox(${i})">
+    </div>`;
+        }
+    }
+
+    function switchTab(type) {
+        const photo = document.getElementById('photo-grid');
+        const video = document.getElementById('video-grid');
+        const btns = document.querySelectorAll('.tab-btn');
+
+        if (type === 'photo') {
+            photo.style.display = 'grid';
+            video.style.display = 'none';
+            btns[0].classList.add('active');
+            btns[1].classList.remove('active');
+        } else {
+            photo.style.display = 'none';
+            video.style.display = 'grid';
+            btns[1].classList.add('active');
+            btns[0].classList.remove('active');
+        }
+    }
+function openLightbox(index) {
+    currentIndex = index;
+    document.getElementById('lb-img').src = photoData[currentIndex];
+    document.getElementById('lightbox').classList.add('active');
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+}
+
+function changeSlide(step) {
+    currentIndex += step;
+
+    if (currentIndex < 0) currentIndex = photoData.length - 1;
+    if (currentIndex >= photoData.length) currentIndex = 0;
+
+    document.getElementById('lb-img').src = photoData[currentIndex];
+}
+document.addEventListener("click", function(e) {
+    if (e.target.tagName === "VIDEO") {
+        e.target.paused ? e.target.play() : e.target.pause();
+    }
+});
+    window.onload = initGallery;
+</script>
+
+</body>
+</html>

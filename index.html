@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+<meta name="viewport" content="width=1200, initial-scale=1, shrink-to-fit=no">
+  <title>Tamiru Promotions | Excellence in Events</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    /*STOP SIDE-SCROLLING AND SWIPING BETWEEN PARTS */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.main-content {
+    flex: 1;
+}
+/* Ensure the body takes up the full screen so footer can sit at the bottom */
+/* This pushes the footer to the absolute bottom of the page */
+#contact {
+    margin-top: auto !important;
+}
+/* This pushes the footer to the bottom if content is short */
+
+/* Force the entrance curtain to stop existing once it slides away */
+.entrance-curtain.hide {
+    transform: translateX(100%);
+    visibility: hidden; /* This prevents it from being "scrolled into" */
+    pointer-events: none;
+}
+
+/* Ensure no section is wider than the viewport */
+section {
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+}
+    .transition-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: #ea580c;
+      z-index: 9999;
+      transform: translateX(-100%);
+      transition: transform 0.5s ease-in-out;
+    }
+    .transition-overlay.active { transform: translateX(0); }
+
+    /* STEP 1a: STICKY NAVBAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    /* STEP 1b: BACK TO TOP BUTTON CSS */
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 9999;
+      border: none;
+      outline: none;
+      background-color: #ea580c;
+      color: white;
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 20px;
+      display: none; /* Hidden by default, shown via JS */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+    #backToTop:hover { transform: scale(1.1); background-color: #c2410c; }
+
+    /* UNIFIED CARD ALIGNMENT LOGIC */
+    /* --- UNIVERSAL RESET FOR ACCURATE SIZING --- */
+/* --- FIXED 3-COLUMN GRID (NO HORIZONTAL SCROLL) --- */
+/* --- FIXED 3-COLUMN GRID (NO HORIZONTAL SCROLL) --- */
+/* --- THE MASTER WRAPPER FIX --- */
+.container, .wrapper {
+    width: 1200px !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 !important; /* Removes side padding that cuts the 3rd card */
+    overflow: hidden; 
+}
+
+/* --- THE 3-CARD GRID (ZERO HORIZONTAL SCROLL) --- */
+.service-boxes, .cards, .testimonial-cards {
+    display: grid !important;
+    /* This divides 1200px into 3 exact columns minus the 20px gaps */
+    grid-template-columns: repeat(3, 1fr) !important; 
+    gap: 20px;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 40px 0 !important;
+    
+    /* Disables all side movement */
+    overflow-x: hidden !important; 
+    overflow-y: visible !important;
+    box-sizing: border-box !important;
+}
+
+/* --- UNIFIED CARD SIZE --- */
+.service-box, .card, .testimonial-card {
+    width: 100% !important; /* Automatically becomes ~386px */
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-sizing: border-box !important;
+    overflow: hidden;
+}
+
+/* --- IMAGE FIX --- */
+.service-box img, .card img, .testimonial-card img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+}
+    .btn-primary {
+      width: fit-content;
+      align-self: center;
+    }
+    
+
+/* 1. THE OUTER BOX: Make the Blue go edge-to-edge */
+/* --- FOOTER OUTER (Full Width & Smooth Dark) --- */
+/* --- THE OUTER FOOTER (Full Width & Dark) --- */
+.site-end-section {
+    background: linear-gradient(180deg, #131b4d 0%, #0a0e29 100%) !important; /* Deep Dark Blue */
+    width: 100vw !important;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw !important;
+    padding: 60px 0 0 0;
+    border-top: 4px solid #ff7a00; /* Your Brand Orange */
+    color: white;
+}
+
+/* --- THE INNER GRID (Centered) --- */
+.master-footer-grid {
+    width: 1200px !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-around;
+    text-align: center; /* THIS CENTERS THE TEXT INSIDE */
+    padding-bottom: 40px;
+}
+
+/* --- COLUMN TITLES --- */
+.footer-title-sub, .footer-title-main {
+    color: #ff7a00;
+    margin-bottom: 20px;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+/* --- THE LISTS (Stacked & Centered) --- */
+.footer-nav-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* CENTERS THE LINKS */
+    gap: 12px;
+}
+
+/* --- HOVER MOVEMENT EFFECT --- */
+.footer-nav-list a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 15px;
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
+}
+
+.footer-nav-list a:hover {
+    color: #ff7a00 !important;
+    transform: translateY(-3px); /* SMOOTH UPWARD MOVEMENT */
+    text-shadow: 0 5px 15px rgba(255, 122, 0, 0.3);
+}
+
+/* --- CONTACT INFO (Centered) --- */
+.contact-text-group p {
+    margin: 8px 0;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* --- BOTTOM BAR --- */
+.legal-bottom-bar {
+    background: #050714 !important; /* Pure Dark for the bottom */
+    width: 100vw !important;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw !important;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+ 
+}
+.site-end-section {
+    position: relative;
+}
+
+/* SMOOTH CURVE */
+.site-end-section::before {
+    content: "";
+    position: absolute;
+    top: -60px;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: #0a0e29; /* same as footer dark */
+    
+    border-top-left-radius: 100% 60px;
+    border-top-right-radius: 100% 60px;
+}
+.site-end-section {
+    background: linear-gradient(
+        to bottom,
+        #1e2a78 0%,
+        #131b4d 40%,
+        #0a0e29 100%
+    );
+}
+html {
+    scroll-behavior: smooth;
+}
+.fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.fade-in.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.footer-nav-list a {
+    transition: all 0.4s ease;
+}
+
+.footer-nav-list a:hover {
+    transform: translateY(-5px);
+}
+.site-end-section {
+    box-shadow: 0 -20px 40px rgba(0,0,0,0.2);
+}
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  background: #ffffff; /* SAME as About section */
+  
+  border-top-left-radius: 100% 80px;
+  border-top-right-radius: 100% 80px;
+}
+  </style>
+</head>
+<body>
+<body>
+<div class="main-content">
+<header id="mainHeader">
+  <div class="navbar">
+    <a href="index.html" class="logo-container">
+      <img src="images/main logo.jpg" alt="Tamiru Promotion & Event" class="logo-img">
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#events">Events</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-btns">
+      <button class="btn-outline" onclick="location.href='book.html'">Booking</button>
+      <button class="btn-primary" onclick="window.location.href='#events'">Events</button>
+    </div>
+  </div>
+</header>
+
+<div id="transitionLayer" class="transition-overlay"></div>
+
+<button id="backToTop" onclick="scrollToTop()">↑</button>
+
+<section class="hero" id="home">
+  <div class="overlay">
+    <h3>To Make Your Events Amazing</h3>
+    <h1><span>Tamiru Promotion & Event</span></h1>
+    <h3>is the First Choice!</h3>
+    <button class="btn-primary" onclick="window.location.href='#about'">Learn More</button>
+    <button class="btn-outline" onclick="smoothNavigate('book.html')">Book an Event</button>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-container">
+    <div class="about-img">
+      <img src="images/about.jpg" alt="About Tamiru">
+    </div>
+    <div class="about-content">
+      <h2>About <span>Tamiru Promotion & Event</span></h2>
+      <p>Tamiru Promotion & Event is a talented and creative team specializing in organizing events with unmatched professionalism and excellence.</p>
+      <ul>
+        <li>Years of Experience in the Event Industry</li>
+        <li>Creative & Dedicated Team of Professionals</li>
+        <li>Commitment to Excellence & Client Satisfaction</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="why-us">
+  <div class="why-container-wrapper">
+    <h2 class="section-title">Why <span>Choose</span> Us</h2>
+    
+    <div class="why-list-grid">
+      
+      <div class="why-list-item">
+        <span class="why-check">✔</span>
+        <div class="why-text-content">
+          <h3>Creative Concepts</h3>
+          <p>We bring unique, fresh ideas tailored specifically for your brand’s goals.</p>
+        </div>
+      </div>
+
+      <div class="why-list-item">
+        <span class="why-check">✔</span>
+        <div class="why-text-content">
+          <h3>Expert Planning</h3>
+          <p>Meticulous attention to every technical detail from start to finish.</p>
+        </div>
+      </div>
+
+      <div class="why-list-item">
+        <span class="why-check">✔</span>
+        <div class="why-text-content">
+          <h3>Modern Technology</h3>
+          <p>Using high-end sound and lighting systems for a premium experience.</p>
+        </div>
+      </div>
+
+      <div class="why-list-item">
+        <span class="why-check">✔</span>
+        <div class="why-text-content">
+          <h3>Reliable Service</h3>
+          <p>A proven track record of successful promotions and client satisfaction.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<section class="services" id="services">
+  <div class="services-container">
+    <h2 class="section-title">Our Services</h2>
+    <div class="service-boxes">
+      <div class="service-box">
+        <img src="images/wedding5.jpg" alt="Event Planning">
+        <h3>Event Planning</h3>
+        <p>Expertly crafted weddings, high-end corporate events, and private parties tailored to your vision.</p>
+        <button class="btn-primary" onclick="smoothNavigate('book.html')">Book Now</button>
+      </div>
+      <div class="service-box">
+        <img src="images/promotion.jpg" alt="Marketing & Promotions">
+        <h3>Marketing & Promotions</h3>
+        <p>Creative campaigns and brand activation strategies that make your message stand out.</p>
+        <button class="btn-primary" onclick="smoothNavigate('book.html')">Book Now</button>
+      </div>
+      <div class="service-box">
+        <img src="images/stage2.jpg" alt="Stage & Production">
+        <h3>Stage & Production</h3>
+        <p>Full-scale sound, cinematic lighting, and logistics management for concerts and large-scale stages.</p>
+        <button class="btn-primary" onclick="smoothNavigate('book.html')">Book Now</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="events" id="events">
+  <h2 class="section-title">Upcoming Events</h2>
+  <div class="cards">
+    <div class="card">
+      <img src="images/educTION.jpg" alt="Student Graduation">
+      <h3>Student Graduation</h3>
+      <p>A grand celebration of academic achievement. Date: June 15.</p>
+     <button class="btn-primary" 
+    onclick="smoothNavigate('food.html?')">
+    View Details
+</button>
+    </div>
+    <div class="card">
+      <img src="images/wedding2.jpg" alt="Wedding program">
+      <h3>Wedding Program</h3>
+      <p>Join us for an elegant evening of love and tradition. Date: July 08.</p>
+   <button class="btn-primary" 
+    onclick="smoothNavigate('food.html?')">
+    View Details
+</button>
+    </div>
+    <div class="card">
+      <img src="images/stage3.jpg" alt="Show">
+      <h3>Event Show</h3>
+      <p>A high-energy production featuring lighting effects. Date: August 20.</p>
+   <button class="btn-primary" 
+    onclick="smoothNavigate('food.html?')">
+    View Details
+</button>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <h2 class="section-title">Testimonials</h2>
+
+  <div class="testimonial-cards">
+
+    <div class="testimonial-card">
+      <img src="images/wedding5.jpg" alt="Kelebet"
+        style="width: 80px; height: 80px; border-radius: 50%; margin: 20px auto 0;">
+      <h3 style="text-align: center;">Kelebet Misganaw</h3>
+      <p style="text-align: center;">
+        "The wedding planning team went above and beyond. Everything was perfect!"
+      </p>
+    </div>
+
+    <div class="testimonial-card">
+      <img src="images/testimonals4.jpg" alt="Getahun"
+        style="width: 80px; height: 80px; border-radius: 50%; margin: 20px auto 0;">
+      <h3 style="text-align: center;">Getahun Misganaw</h3>
+      <p style="text-align: center;">
+        "Highly professional and organized. They made our gala unforgettable!"
+      </p>
+    </div>
+
+    <div class="testimonial-card">
+      <img src="images/wedding1.jpg" alt="Abebe"
+        style="width: 80px; height: 80px; border-radius: 50%; margin: 20px auto 0;">
+      <h3 style="text-align: center;">Abebe Kebede</h3>
+      <p style="text-align: center;">
+        "Amazing stage setup and sound quality. Top-tier production!"
+      </p>
+    </div>
+
+  </div>
+
+  <!-- ✅ VIEW MORE BUTTON -->
+  <a href="javascript:void(0)" 
+   onclick="animateAndNavigate('testimonials.html')" 
+   class="view-more-btn">
+   View More Testimonials →
+</a>
+<section class="gallery-section">
+    <div class="gallery-container">
+       <h2 class="section-title" id="gallery">Our Gallery</h2>
+        
+      <div class="gallery-tabs">
+    <button class="tab-btn active" onclick="switchGallery('photo')">Photos</button>
+    <button class="tab-btn" onclick="switchGallery('video')">Videos</button>
+</div>
+
+        <div id="photo-grid" class="content-grid">
+            <div class="gallery-item"><img src="images/stage1.jpg" alt="Wedding"></div>
+            <div class="gallery-item"><img src="images/stage3.jpg" alt="Concert"></div>
+            <div class="gallery-item"><img src="images/education7.jpg" alt="Gala"></div>
+            <div class="gallery-item"><img src="images/eeducation4.jpg" alt="Expo"></div>
+            <div class="gallery-item"><img src="images/wed7.jpg" alt="Launch"></div>
+            <div class="gallery-item"><img src="images/stage5.jpg" alt="Meeting"></div>
+            <div class="gallery-item"><img src="images/wedding1.jpg" alt="Party"></div>
+            <div class="gallery-item"><img src="images/wedding3.jpg" alt="Festival"></div>
+            <div class="gallery-item"><img src="images/wedding2.jpg" alt="Fashion"></div>
+            <div class="gallery-item"><img src="images/stage8.jpg" alt="Academic"></div>
+             <div class="gallery-item"><img src="images/education3.jpg" alt="Fashion"></div>
+            <div class="gallery-item"><img src="images/EDUCATION2.jpg" alt="Academic"></div>
+        </div>
+
+        <div id="video-grid" class="content-grid" style="display: none;">
+            <div class="gallery-item"><video muted loop onmouseover="this.play()" onmouseout="this.pause()"><source src="video/video1.MP4" type="video/mp4"></video></div>
+            <div class="gallery-item"><video muted loop onmouseover="this.play()" onmouseout="this.pause()"><source src="video/video2.MP4" type="video/mp4"></video></div>
+            <div class="gallery-item"><video muted loop onmouseover="this.play()" onmouseout="this.pause()"><source src="video/video4.MOV" type="video/mp4"></video></div>
+            <div class="gallery-item"><video muted loop onmouseover="this.play()" onmouseout="this.pause()"><source src="video/video3.MOV" type="video/mp4"></video></div>
+            <div class="gallery-item"><video muted loop onmouseover="this.play()" onmouseout="this.pause()"><source src="video/video4.MOV" type="video/mp4"></video></div>
+            <div class="gallery-item"><video muted loop onmouseover="this.play()" onmouseout="this.pause()"><source src="video/video3.MOV" type="video/mp4"></video></div>
+            <div class="gallery-item"><video muted loop onmouseover="this.play()" onmouseout="this.pause()"><source src="video/video2.MP4" type="video/mp4"></video></div>
+            <div class="gallery-item"><video muted loop onmouseover="this.play()" onmouseout="this.pause()"><source src="video/video1.MP4" type="video/mp4"></video></div>
+            <div class="gallery-item"><video muted loop onmouseover="this.play()" onmouseout="this.pause()"><source src="video/video2.MP4" type="video/mp4"></video></div>
+            <div class="gallery-item"><video muted loop onmouseover="this.play()" onmouseout="this.pause()"><source src="video/video1.MP4" type="video/mp4"></video></div>
+                        <div class="gallery-item"><video muted loop onmouseover="this.play()" onmouseout="this.pause()"><source src="video/video4.MOV" type="video/mp4"></video></div>
+            <div class="gallery-item"><video muted loop onmouseover="this.play()" onmouseout="this.pause()"><source src="video/video2.MP4" type="video/mp4"></video></div>
+        </div>
+
+       <div class="gallery-footer">
+    <button class="watch-more-btn" onclick="animateAndNavigate('gallary.html')">
+        Watch More <span>&rarr;</span>
+    </button>
+</div>
+    </div>
+</section>
+<section class="faq">
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <div class="faq-container">
+    <div class="faq-column">
+      <div class="faq-item">
+        <button class="faq-question">How do I book? <span>+</span></button>
+        <div class="faq-answer"><p>You can book directly through our website contact form or by calling our office.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What events do you handle? <span>+</span></button>
+        <div class="faq-answer"><p>We specialize in weddings, corporate galas, and private celebrations.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Can I customize my package? <span>+</span></button>
+        <div class="faq-answer"><p>Absolutely! We offer flexible packages tailored to your specific budget and vision.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do you offer catering? <span>+</span></button>
+        <div class="faq-answer"><p>We partner with top-tier local caterers to provide a variety of menu options.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What is your cancellation policy? <span>+</span></button>
+        <div class="faq-answer"><p>Cancellations made 30 days before the event receive a full deposit refund.</p></div>
+      </div>
+    </div>
+
+    <div class="faq-column">
+      <div class="faq-item">
+        <button class="faq-question">Payment options? <span>+</span></button>
+        <div class="faq-answer"><p>We accept all major credit cards, bank transfers, and digital wallets like PayPal.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Is on-site coordination included? <span>+</span></button>
+        <div class="faq-answer"><p>Yes, our professional coordinators stay on-site to ensure everything runs smoothly.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do you provide lighting? <span>+</span></button>
+        <div class="faq-answer"><p>Yes, we provide ambient, stage, and decorative lighting as part of our setup.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How far in advance should I book? <span>+</span></button>
+        <div class="faq-answer"><p>We recommend booking at least 3-6 months in advance for large events.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do you travel for events? <span>+</span></button>
+        <div class="faq-answer"><p>Yes, we are happy to travel! Travel fees apply for events 50 miles outside the city.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+<footer id="contact" class="site-end-section">
+  <div class="master-footer-grid">
+    
+
+    <div class="navigation-column">
+      <h3 class="footer-title-sub">Quick Links</h3>
+      <nav class="footer-nav-list">
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="book.html">Book Now</a>
+      </nav>
+    </div>
+
+    <div class="info-column">
+      <h3 class="footer-title-sub">Contact Us</h3>
+      <div class="contact-text-group">
+        <p>📍 Wolayita Sodo, Ethiopia</p>
+        <p>📞 +251 945842772</p>
+        <p>📧 tamirumisganaw@gmail.com</p>
+      </div>
+    </div>
+
+    <div class="social-column">
+      <h3 class="footer-title-sub">Follow Us</h3>
+      <nav class="footer-nav-list">
+        <a href="#" class="social-link-item">Facebook</a>
+        <a href="#" class="social-link-item">Instagram</a>
+        <a href="#" class="social-link-item">TikTok</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="legal-bottom-bar">
+    <p>&copy; 2026 Tamiru Promotion & Event. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // STEP 1: BUTTON LOGIC
+  const topBtn = document.getElementById("backToTop");
+
+  window.onscroll = function() {
+    // Show button after scrolling 400px
+    if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+      topBtn.style.display = "block";
+    } else {
+      topBtn.style.display = "none";
+    }
+  };
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function smoothNavigate(url) {
+    const layer = document.getElementById('transitionLayer');
+    layer.classList.add('active');
+    setTimeout(() => { window.location.href = url; }, 500);
+  }
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+});
+
+document.querySelectorAll("section, .card, .service-box, .testimonial-card")
+.forEach(el => {
+  el.classList.add("fade-in");
+  observer.observe(el);
+});
+function toggleMenu() {
+  const nav = document.querySelector(".navbar nav");
+  nav.style.display = nav.style.display === "flex" ? "none" : "flex";
+}
+function showTab(tabName) {
+  const tabs = document.querySelectorAll(".gallery-grid");
+  const buttons = document.querySelectorAll(".tab");
+
+  tabs.forEach(tab => tab.classList.remove("active"));
+  buttons.forEach(btn => btn.classList.remove("active"));
+
+  document.getElementById(tabName).classList.add("active");
+  event.target.classList.add("active");
+}
+function animateAndNavigate(url) {
+        // You'll need the CSS for .page-exit on your home page too!
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.6s ease';
+        setTimeout(() => {
+            window.location.href = url;
+        }, 600);
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+    // This ensures the gallery starts correctly on 'photo'
+    switchGallery('photo');
+});
+
+function switchGallery(type) {
+    const photoGrid = document.getElementById('photo-grid');
+    const videoGrid = document.getElementById('video-grid');
+    const buttons = document.querySelectorAll('.tab-btn');
+
+    if (!photoGrid || !videoGrid) {
+        console.error("Gallery grids not found! Check your IDs.");
+        return;
+    }
+
+    // 1. Reset all buttons and grids
+    buttons.forEach(btn => btn.classList.remove('active'));
+    photoGrid.style.display = 'none';
+    videoGrid.style.display = 'none';
+
+    // 2. Active Logic
+    if (type === 'photo') {
+        photoGrid.style.display = 'grid'; // Maintain your 3-column PC look
+        buttons[0].classList.add('active');
+    } else {
+        videoGrid.style.display = 'grid';
+        buttons[1].classList.add('active');
+    }
+
+    // 3. Stop all videos when switching to prevent background noise
+    document.querySelectorAll('video').forEach(v => {
+        v.pause();
+        v.currentTime = 0;
+    });
+}
+
+// Use 'window.onload' to ensure even the loader is finished
+window.addEventListener("load", function() {
+    const faqButtons = document.querySelectorAll(".faq-question");
+    
+    console.log("FAQ Script loaded. Found " + faqButtons.length + " buttons."); // Debug check
+
+    faqButtons.forEach(button => {
+        button.onclick = function() {
+            const parent = this.parentElement;
+            
+            // Toggle current one
+            parent.classList.toggle("active");
+            
+            // Close others
+            document.querySelectorAll(".faq-item").forEach(item => {
+                if (item !== parent) {
+                    item.classList.remove("active");
+                }
+            });
+        };
+    });
+});
+
+</script>
+</body>
+</html>

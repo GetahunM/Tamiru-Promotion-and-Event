@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   <meta name="viewport" content="width=1200">
+    <title>Testimonials | Tamiru Promotion & Event</title>
+    <style>
+        :root {
+            --primary: #111827;
+            --accent: #c5a059; /* Gold */
+            --white: #ffffff;
+            --bg-light: #f9fafb;
+            --text-muted: #6b7280;
+            --glass: rgba(255, 255, 255, 0.9);
+        }
+
+        /* 1. ANIMATION & BASE SETUP */
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--primary);
+            margin: 0;
+            padding: 0;
+            opacity: 1;
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+        }
+
+        .page-exit {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        /* 2. STICKY GLASS NAVIGATION */
+        .glass-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 75px;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            box-sizing: border-box;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .back-btn:hover {
+            color: var(--accent);
+            transform: translateX(-5px);
+        }
+
+        /* 3. HEADER SECTION */
+        .wrapper {
+            max-width: 1200px;
+            margin: 160px auto 60px;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-header h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            margin: 0 0 20px;
+        }
+
+        .brand-statement {
+            font-size: 1.15rem;
+            color: var(--accent);
+            font-style: italic;
+            max-width: 750px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        /* 4. TESTIMONIAL GRID */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 35px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 45px 35px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.02);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: 1px solid rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 45px rgba(197, 160, 89, 0.12);
+            border-color: rgba(197, 160, 89, 0.2);
+        }
+
+        .role-badge {
+            background: #f1f5f9;
+            color: var(--accent);
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 6px 16px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+
+        .client-img {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 3px solid var(--accent);
+            padding: 3px;
+            background: white;
+            object-fit: cover;
+        }
+
+        .stars { color: #fbbf24; margin-bottom: 15px; font-size: 0.9rem; }
+        
+        .client-name { font-size: 1.25rem; margin: 0 0 10px; font-weight: 700; }
+
+        .testimonial-text {
+            color: var(--text-muted);
+            line-height: 1.7;
+            text-align: center;
+            font-style: italic;
+            margin: 0;
+        }
+
+        /* 5. AUTHORITY FOOTER */
+        .footer-cta {
+            background: var(--primary);
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+            margin-top: 120px;
+            border-top: 6px solid var(--accent);
+        }
+
+        .achievement-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 80px;
+            margin-bottom: 80px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box { display: flex; flex-direction: column; align-items: center; }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-top: 12px;
+            opacity: 0.7;
+        }
+
+        .stat-divider {
+            width: 1px;
+            height: 90px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .final-call h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+        }
+
+        .btn-consult {
+            background-color: var(--accent);
+            color: var(--primary);
+            border: none;
+            padding: 20px 50px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .btn-consult:hover {
+            background-color: #b38e4a;
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+
+        .copyright {
+            margin-top: 100px;
+            font-size: 0.7rem;
+            opacity: 0.4;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .stat-divider { display: none; }
+            .section-header h1 { font-size: 2.5rem; }
+            .achievement-grid { gap: 50px; }
+        }
+        /* FORCE FIXED DESKTOP WIDTH */
+.wrapper {
+    width: 1200px; /* Lock width to desktop size */
+    margin: 160px auto 60px;
+    padding: 0 20px;
+}
+
+.testimonial-grid {
+    display: grid;
+    /* Force 3 columns exactly like PC, no matter the screen size */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 35px;
+    width: 100%;
+}
+
+/* PREVENT MOBILE ZOOM-IN/STACKING */
+@media only screen and (max-width: 1200px) {
+    body {
+        width: 1200px; /* Ensures the body doesn't shrink */
+    }
+    
+    .glass-nav {
+        width: 1200px; /* Keeps the nav aligned with the wide body */
+    }
+
+    .footer-cta {
+        width: 1200px;
+    }
+}/* FORCE THE DESKTOP SIZE */
+body {
+    min-width: 1200px; /* Prevents the page from shrinking smaller than PC width */
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    width: 1200px; /* Fixed width for the content area */
+    margin: 140px auto 60px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.testimonial-grid {
+    display: grid;
+    /* FORCE 3 COLUMNS: They will never drop to 1 or 2 columns */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px;
+    width: 100%;
+}
+
+/* FIX THE NAVIGATION AND FOOTER TO 1200px */
+.glass-nav, .footer-cta {
+    min-width: 1200px;
+    width: 100%;
+}
+    </style>
+</head>
+<body>
+
+    <nav class="glass-nav">
+        <div class="back-btn" onclick="animateAndNavigate('index.html')">
+            <span>&#8592;</span> Back to Home
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <div class="section-header">
+            <h1>Testimonials</h1>
+            <p class="brand-statement">
+                "Real stories from the people who trusted us to turn their most important visions 
+                into unforgettable, high-impact reality."
+            </p>
+        </div>
+
+        <div class="testimonial-grid" id="testimonialGrid">
+            <div class="testimonial-card">
+                <span class="role-badge">Private Wedding</span>
+                <img src="images/wedding5.jpg" class="client-img" alt="Kelebet">
+                <div class="stars">★★★★★</div>
+                <h3 class="client-name">Kelebet Misganaw</h3>
+                <p class="testimonial-text">"The wedding planning team went above and beyond. Everything was perfect!"</p>
+            </div>
+
+            <div class="testimonial-card">
+                <span class="role-badge">Corporate Event</span>
+                <img src="images/testimonals4.jpg" class="client-img" alt="Getahun">
+                <div class="stars">★★★★★</div>
+                <h3 class="client-name">Getahun Misganaw</h3>
+                <p class="testimonial-text">"Highly professional and organized. They made our gala unforgettable!"</p>
+            </div>
+
+            <div class="testimonial-card">
+                <span class="role-badge">Stage Production</span>
+                <img src="images/wedding1.jpg" class="client-img" alt="Abebe">
+                <div class="stars">★★★★★</div>
+                <h3 class="client-name">Abebe Kebede</h3>
+                <p class="testimonial-text">"Amazing stage setup and sound quality. Top-tier production!"</p>
+            </div>
+
+            </div>
+    </div>
+
+    <section class="footer-cta">
+        <div class="achievement-grid">
+            <div class="stat-box">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Events Managed</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-box">
+                <span style="font-size: 2rem;">🏆</span>
+                <span class="stat-number">Award Winning</span>
+                <span class="stat-label">Production Quality</span>
+            </div>
+        </div>
+
+        <div class="final-call">
+            <h2>Ready to Host Your Next Masterpiece?</h2>
+            <p>Experience the precision, creativity, and excellence that define our brand.</p>
+            <button class="btn-consult" onclick="animateAndNavigate('book.html')">
+                Book a Consultation
+            </button>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2026 TAMIRU PROMOTION & EVENT. ALL RIGHTS RESERVED.
+        </div>
+    </section>
+
+    <script>
+        
+        // Array for 12 additional clients (Total 15)
+        const clients = [
+            { name: "Sara Tesfaye", role: "Media Lead", text: "Incredible promotion reach. Our brand visibility doubled.", img: "images/testimonals4.jpg" },
+            { name: "Elias Haile", role: "Organizer", text: "The audio fidelity was unmatched. Best in Ethiopia.", img: "images/testimonals4.jpg" },
+            { name: "Mulugeta W.", role: "CEO", text: "Tamiru handles high-pressure events with amazing calm.", img: "images/testimonals4.jpg" },
+            { name: "Lydia Daniel", role: "Bride", text: "Truly bespoke service. They listened to every small detail.", img: "images/testimonals4.jpg" },
+            { name: "Yonas K.", role: "Director", text: "Precision lighting that changed the whole atmosphere.", img: "images/testimonals4.jpg" },
+            { name: "Hana Girma", role: "Graduate", text: "My graduation photos and stage walk were perfect.", img: "images/testimonals4.jpg" },
+            { name: "Tewodros A.", role: "Owner", text: "Professional partners who respect the venue and schedule.", img: "images/testimonals4.jpg" },
+            { name: "Selamawit Y.", role: "Designer", text: "The runway setup was world-class. Simply stunning.", img: "images/testimonals4.jpg" },
+            { name: "Kidus Isaac", role: "Artist", text: "They treat artists with respect and handle logistics flawlessly.", img: "images/testimonals4.jpg" },
+            { name: "Biniyam T.", role: "Socialite", text: "If you want a luxury event, you call Tamiru Promotion.", img: "images/testimonals4.jpg" },
+            { name: "Dr. Aster Melaku", role: "Speaker", text: "Seamless conference management experienced globally.", img: "images/testimonals4.jpg" },
+            { name: "Nebiyu Solomon", role: "Tech Lead", text: "Advanced multimedia integration. They really know their tech.", img: "images/testimonals4.jpg" }
+        ];
+
+        const grid = document.getElementById('testimonialGrid');
+
+        clients.forEach(c => {
+            grid.innerHTML += `
+                <div class="testimonial-card">
+                    <span class="role-badge">${c.role}</span>
+                    <img src="${c.img}" class="client-img" alt="${c.name}">
+                    <div class="stars">★★★★★</div>
+                    <h3 class="client-name">${c.name}</h3>
+                    <p class="testimonial-text">"${c.text}"</p>
+                </div>
+            `;
+        });
+
+        // SMOOTH NAVIGATION FUNCTION
+        function animateAndNavigate(url) {
+            document.body.classList.add('page-exit');
+            setTimeout(() => {
+                window.location.href = url;
+         
+            }, 600); 
+            const clients = [
+    // ... your 12 clients from before ...
+];
+
+const grid = document.getElementById('testimonialGrid');
+
+// This renders the cards. Because the CSS is repeat(3, 1fr), 
+// it will automatically create new rows vertically.
+clients.forEach(c => {
+    grid.innerHTML += `
+        <div class="testimonial-card">
+            <div style="text-align: center;"><span class="role-badge">${c.role}</span></div>
+            <img src="${c.img}" class="client-img" alt="${c.name}">
+            <div class="stars" style="text-align: center;">★★★★★</div>
+            <h3 class="client-name" style="text-align: center;">${c.name}</h3>
+            <p class="testimonial-text">"${c.text}"</p>
+        </div>
+    `;
+});
+        }
+        
+    </script>
+</body>
+</html>

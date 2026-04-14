@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Event | Tamiru Promotion & Event</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #f8fafc; 
+            opacity: 0; 
+            transform: translateY(10px);
+            transition: all 0.6s ease-out;
+        }
+        body.loaded { opacity: 1; transform: translateY(0); }
+        
+        .nav-dropdown { opacity: 0; transform: translateY(-10px); pointer-events: none; transition: all 0.3s ease; }
+        .nav-dropdown.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        
+        .modal-hidden { display: none; }
+        .modal-visible { display: flex; animation: fadeIn 0.3s ease forwards; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .entrance-curtain {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #e69265;
+            z-index: 10000;
+            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+        }/* ABSOLUTE FIX FOR HORIZONTAL SCROLL */
+html, body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden !important; /* Forcefully stops horizontal scroll */
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+/* Prevents the Curtain from creating extra width when it slides right */
+.entrance-curtain {
+    max-width: 100vw;
+    overflow: hidden;
+}
+
+/* Ensures the header and main content don't exceed the screen width */
+header, main {
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+}
+
+/* Fix for the Nav Dropdown in case it opens past the edge */
+#navMenu {
+    right: 0;
+    max-width: calc(100vw - 20px);
+}
+        .entrance-curtain.hide { transform: translateX(100%); }
+    </style>
+</head>
+<body class="text-slate-900">
+
+    <div id="entrance" class="entrance-curtain"></div>
+
+    <div id="successModal" class="modal-hidden fixed inset-0 z-[100] items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-[2.5rem] p-10 max-w-sm w-full text-center shadow-2xl">
+            <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">✓</div>
+            <h2 class="text-2xl font-bold mb-2 text-slate-900">Booking Received!</h2>
+            <p class="text-slate-500 mb-8">Our production team will contact you shortly to finalize the details.</p>
+            <button onclick="window.location.href='index.html'" class="w-full bg-orange-600 text-white font-bold py-4 rounded-2xl hover:bg-orange-700 transition-all shadow-lg">Back to Home</button>
+        </div>
+    </div>
+
+    <header class="bg-white border-b border-slate-100 py-5 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center relative">
+            <a href="index.html" class="text-2xl font-black tracking-tighter italic hover:text-orange-600 transition-colors">
+                TAMIRU <span class="text-orange-600">PROMOTION</span>
+            </a>
+            
+            <div class="relative">
+                <button onclick="toggleMenu(event)" class="p-2 hover:bg-slate-100 rounded-xl transition-all focus:outline-none">
+                    <svg class="w-8 h-8 text-slate-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>
+                    </svg>
+                </button>
+                
+                <div id="navMenu" class="nav-dropdown absolute right-0 mt-4 w-64 bg-white border border-slate-100 shadow-2xl rounded-2xl p-2 z-50">
+                    <a href="index.html" class="block px-4 py-3 text-slate-600 hover:bg-orange-50 hover:text-orange-600 rounded-xl font-medium">Home</a>
+                    <a href="index.html#about" class="block px-4 py-3 text-slate-600 hover:bg-orange-50 hover:text-orange-600 rounded-xl font-medium">About</a>
+                    <a href="index.html#services" class="block px-4 py-3 text-slate-600 hover:bg-orange-50 hover:text-orange-600 rounded-xl font-medium">Services</a>
+                    <a href="index.html#events" class="block px-4 py-3 text-slate-600 hover:bg-orange-50 hover:text-orange-600 rounded-xl font-medium">Events</a>
+                    <a href="index.html#gallery" class="block px-4 py-3 text-slate-600 hover:bg-orange-50 hover:text-orange-600 rounded-xl font-medium">Gallery</a>
+                    <a href="index.html#contact" class="block px-4 py-3 text-slate-600 hover:bg-orange-50 hover:text-orange-600 rounded-xl font-medium">Contact</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12">
+        <div class="bg-white rounded-[2.5rem] shadow-xl border border-slate-100 overflow-hidden">
+            <form id="bookingForm" class="p-8 space-y-10">
+                
+                <section>
+                    <h2 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">01. Client Identification</h2>
+                    <div class="grid grid-cols-2 gap-4 sm:gap-6">
+                        <input type="text" placeholder="Full Name" required class="w-full p-4 bg-slate-50 rounded-2xl ring-1 ring-slate-200 outline-none focus:ring-2 focus:ring-orange-600 transition-all text-xs sm:text-sm">
+                        <input type="tel" placeholder="Phone Number" required class="w-full p-4 bg-slate-50 rounded-2xl ring-1 ring-slate-200 outline-none focus:ring-2 focus:ring-orange-600 transition-all text-xs sm:text-sm">
+                        <input type="text" placeholder="Address" class="w-full p-4 bg-slate-50 rounded-2xl ring-1 ring-slate-200 outline-none focus:ring-2 focus:ring-orange-600 transition-all text-xs sm:text-sm">
+                        <input type="text" placeholder="Venue Name" class="w-full p-4 bg-slate-50 rounded-2xl ring-1 ring-slate-200 outline-none focus:ring-2 focus:ring-orange-600 transition-all text-xs sm:text-sm">
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">02. Select Event Nature</h2>
+                    <div class="grid grid-cols-4 gap-2">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="evt" value="wedding" class="hidden peer" checked onchange="updateEvent('wedding')">
+                            <div class="py-4 border-2 border-slate-100 rounded-2xl text-center peer-checked:border-orange-600 peer-checked:bg-orange-50 transition-all text-[9px] sm:text-sm">💍 Wed</div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="evt" value="graduation" class="hidden peer" onchange="updateEvent('graduation')">
+                            <div class="py-4 border-2 border-slate-100 rounded-2xl text-center peer-checked:border-orange-600 peer-checked:bg-orange-50 transition-all text-[9px] sm:text-sm">🎓 Grad</div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="evt" value="stage" class="hidden peer" onchange="updateEvent('stage')">
+                            <div class="py-4 border-2 border-slate-100 rounded-2xl text-center peer-checked:border-orange-600 peer-checked:bg-orange-50 transition-all text-[9px] sm:text-sm">⚡ Stage</div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="evt" value="promotion" class="hidden peer" onchange="updateEvent('promotion')">
+                            <div class="py-4 border-2 border-slate-100 rounded-2xl text-center peer-checked:border-orange-600 peer-checked:bg-orange-50 transition-all text-[9px] sm:text-sm">📢 Promo</div>
+                        </label>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">03. Requirements for <span id="eventTitle" class="text-orange-600">Wedding</span></h2>
+                    <div id="techGrid" class="grid grid-cols-2 gap-3"></div>
+                </section>
+
+                <section>
+                    <h2 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">04. Logistics</h2>
+                    <div class="grid grid-cols-2 gap-4 sm:gap-6">
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-bold text-slate-500 uppercase ml-1">Guests</label>
+                            <input type="number" id="guestInput" value="100" class="w-full p-4 bg-slate-50 rounded-2xl ring-1 ring-slate-200 outline-none focus:ring-2 focus:ring-orange-600 transition-all">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-bold text-slate-500 uppercase ml-1">Date</label>
+                            <input type="date" class="w-full p-4 bg-slate-50 rounded-2xl ring-1 ring-slate-200 outline-none focus:ring-2 focus:ring-orange-600 transition-all">
+                        </div>
+                    </div>
+                </section>
+            </form>
+
+            <div class="bg-slate-900 p-8 flex flex-col items-center border-t-8 border-orange-600">
+                <div class="text-center mb-6 text-white">
+                    <p class="text-orange-500 font-bold uppercase text-[10px] tracking-widest mb-1">Estimated Total</p>
+                    <h3 class="text-4xl font-black">$<span id="totalDisplay">0</span></h3>
+                </div>
+                <div class="flex flex-col gap-3 w-full max-w-sm">
+                    <button onclick="handleConfirm()" class="bg-orange-600 text-white py-4 rounded-2xl font-black text-lg hover:bg-orange-700 active:scale-95 transition-all shadow-xl">CONFIRM BOOKING</button>
+                    <button type="button" onclick="resetForm()" class="bg-slate-800 text-slate-300 py-3 rounded-2xl font-bold text-sm hover:bg-slate-700">CANCEL</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const eventData = {
+            wedding: { title: "Wedding", rate: 60, tech: ["Lighting", "Catering", "Flower", "Photo"] },
+            graduation: { title: "Graduation", rate: 40, tech: ["Podium", "Projection", "Sound", "Stage"] },
+            stage: { title: "Stage", rate: 120, tech: ["LED Wall", "Moving FX", "Smoke", "Rigging"] },
+            promotion: { title: "Promotion", rate: 55, tech: ["Branding", "Street Team", "Social", "Sound Van"] }
+        };
+
+        let currentRate = 60;
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('entrance').classList.add('hide');
+                document.body.classList.add('loaded');
+            }, 100);
+        });
+
+        // Hides menu when clicking anywhere on body
+        document.addEventListener('click', (event) => {
+            const menu = document.getElementById('navMenu');
+            const isClickInside = menu.contains(event.target);
+            const isClickOnButton = event.target.closest('button') && event.target.closest('button').getAttribute('onclick')?.includes('toggleMenu');
+
+            if (!isClickInside && !isClickOnButton && menu.classList.contains('active')) {
+                menu.classList.remove('active');
+            }
+        });
+
+        function toggleMenu(event) {
+            event.stopPropagation();
+            document.getElementById('navMenu').classList.toggle('active');
+        }
+
+        function updateEvent(type) {
+            const data = eventData[type];
+            currentRate = data.rate;
+            document.getElementById('eventTitle').innerText = data.title;
+            const grid = document.getElementById('techGrid');
+            grid.innerHTML = '';
+            data.tech.forEach(item => {
+                grid.innerHTML += `
+                    <label class="flex items-center p-3 bg-slate-50 rounded-xl cursor-pointer hover:bg-orange-50">
+                        <input type="checkbox" class="tech-check w-4 h-4 accent-orange-600" onchange="calculate()">
+                        <span class="ml-2 font-semibold text-[10px] sm:text-xs text-slate-700">${item}</span>
+                    </label>`;
+            });
+            calculate();
+        }
+
+        function calculate() {
+            const guests = parseInt(document.getElementById('guestInput').value) || 0;
+            const checks = document.querySelectorAll('.tech-check:checked').length;
+            const total = (guests * currentRate) + (checks * 200);
+            document.getElementById('totalDisplay').innerText = total.toLocaleString();
+        }
+
+        function handleConfirm() {
+            document.getElementById('successModal').classList.remove('modal-hidden');
+            document.getElementById('successModal').classList.add('modal-visible');
+        }
+
+        function resetForm() {
+            document.getElementById('bookingForm').reset();
+            updateEvent('wedding');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.getElementById('guestInput').addEventListener('input', calculate);
+        updateEvent('wedding');
+    </script>
+</body>
+</html>
