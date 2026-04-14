@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1200, initial-scale=1, shrink-to-fit=no">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Tamiru Promotions | Excellence in Events</title>
@@ -16,12 +15,11 @@ html, body {
     padding: 0;
 }
 
-
 body {
-    margin: 0;
-    padding: 0;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
-    overflow-x: hidden;
+    
 }
 .main-content {
     flex: 1;
@@ -102,10 +100,11 @@ section {
 .service-boxes, .cards, .testimonial-cards {
     display: grid !important;
     /* This divides 1200px into 3 exact columns minus the 20px gaps */
-
+    grid-template-columns: repeat(3, 1fr) !important; 
     gap: 20px;
-
+ max-width: 1200px !important;
 width: 100% !important;
+    margin: 0 auto !important;
     padding: 40px 0 !important;
     
     /* Disables all side movement */
@@ -113,24 +112,11 @@ width: 100% !important;
     overflow-y: visible !important;
     box-sizing: border-box !important;
 }
-@media (max-width: 900px) {
-  .service-boxes,
-  .cards,
-  .testimonial-cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 
-@media (max-width: 600px) {
-  .service-boxes,
-  .cards,
-  .testimonial-cards {
-    grid-template-columns: 1fr;
-  }
-}
 /* --- UNIFIED CARD SIZE --- */
 .service-box, .card, .testimonial-card {
-  width: 100%; 
+    width: 100% !important; /* Automatically becomes ~386px */
+    background: #ffffff;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     box-sizing: border-box !important;
@@ -154,17 +140,18 @@ width: 100% !important;
 /* --- THE OUTER FOOTER (Full Width & Dark) --- */
 .site-end-section {
     background: linear-gradient(180deg, #131b4d 0%, #0a0e29 100%) !important; /* Deep Dark Blue */
- width: 100%;
+    width: 100vw !important;
     position: relative;
-
- padding: 60px 0 0 0;
+    left: 50%;
+    margin-left: -50vw !important;
+    padding: 60px 0 0 0;
     border-top: 4px solid #ff7a00; /* Your Brand Orange */
     color: white;
 }
 
 /* --- THE INNER GRID (Centered) --- */
 .master-footer-grid {
-  width: 100%;
+    width: 1200px !important;
     margin: 0 auto !important;
     display: flex !important;
     flex-direction: row !important;
@@ -214,7 +201,7 @@ width: 100% !important;
 /* --- BOTTOM BAR --- */
 .legal-bottom-bar {
     background: #050714 !important; /* Pure Dark for the bottom */
- width: 100%;
+    width: 100vw !important;
     position: relative;
     left: 50%;
     margin-left: -50vw !important;
