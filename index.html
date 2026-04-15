@@ -19,7 +19,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    
+    /* This 'spacer' ensures your text starts BELOW the blue bar */
+    padding-top: 90px; 
 }
 .main-content {
     flex: 1;
@@ -42,7 +43,7 @@ body {
 section {
     width: 100%;
     max-width: 100vw;
-    overflow: hidden;
+    /* Removed overflow: hidden so it doesn't fight with the navbar */
 }
     .transition-overlay {
       position: fixed;
@@ -55,14 +56,15 @@ section {
     .transition-overlay.active { transform: translateX(0); }
 
     /* STEP 1a: STICKY NAVBAR */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: white;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
+   header {
+  position: fixed; /* Fixes the 'disappearing' issue on mobile */
+  top: 0;
+  left: 0;
+  width: 100%; 
+  z-index: 9999; /* Tells the phone this is the top layer */
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
     /* STEP 1b: BACK TO TOP BUTTON CSS */
     #backToTop {
       position: fixed;

@@ -89,13 +89,13 @@ nav a:hover {
 /* HERO */
 /* Hero Text Size Increase */
 .hero .overlay h1 {
-  font-size: 40px;
+  font-size: 42px;
    /* main title */
    margin-right: 25px;
 }
 
 .hero .overlay h3 {
-  font-size: 22px; /* subtitles */
+  font-size: 24px; /* subtitles */
   margin-left: 8px;
 }
 
@@ -187,14 +187,14 @@ nav a:hover {
 }
 
 .service-box p {
-  font-size: 16px;
+  font-size: 18px;
   color: #555;
   margin-bottom: 20px;
 }
 
 .service-box button {
   padding: 10px 25px;
-  font-size: 16px;
+  font-size: 18px;
   border: none;
   border-radius: 5px;
   background: #ff7a00;
@@ -240,7 +240,7 @@ nav a:hover {
 
 .about-content h2 {
   color: #1e2a78;
-  font-size: 28px;
+  font-size: 34px;
 }
 
 .about-content h2 span {
@@ -315,14 +315,14 @@ nav a:hover {
 }
 
 .card p {
-  font-size: 16px;
+  font-size:  18px;
   color: #555;
   margin-bottom: 20px;
 }
 
 .card button {
   padding: 10px 25px;
-  font-size: 16px;
+  font-size: 18px;
   border: none;
   border-radius: 5px;
   background: #ff7a00;
@@ -400,7 +400,7 @@ nav a:hover {
 }
 
 .testimonial-card p {
-  font-size: 16px;
+  font-size:  18px;
   color: #555;
   line-height: 1.5;
 }
@@ -530,7 +530,7 @@ nav a:hover {
 .faq-question {
   width: 100%;
   padding: 15px 20px;
-  font-size: 16px;
+  font-size: 26px;
   text-align: left;
   background: #ffffff;
   color: #333;
@@ -617,7 +617,7 @@ nav a:hover {
 
 .why-text-content p {
   color: #555;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.6;
   margin: 0;
 }
