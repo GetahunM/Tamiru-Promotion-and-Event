@@ -290,6 +290,60 @@ body {
 .glass-nav, .footer-cta {
     min-width: 1200px;
     width: 100%;
+}/* =========================
+   DARK MODE HAMBURGER FIX
+/* =========================
+   DARK MODE (MATCH BOOK PAGE)
+   ========================= */
+
+body.dark-mode {
+    background: #0b1220 !important;
+    color: #e5e7eb !important;
+}
+
+/* NAVBAR */
+body.dark-mode .glass-nav {
+    background: rgba(0,0,0,0.95) !important;
+    border-bottom: 1px solid #1f2937;
+}
+
+/* HEADER TEXT */
+body.dark-mode .section-header h1,
+body.dark-mode .brand-statement {
+    color: #e5e7eb !important;
+}
+
+/* CARDS */
+body.dark-mode .testimonial-card {
+    background: #000 !important;
+    border: 1px solid #1f1f1f;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+}
+
+/* TEXT */
+body.dark-mode .testimonial-text {
+    color: #94a3b8 !important;
+}
+
+/* BADGE */
+body.dark-mode .role-badge {
+    background: #0a0a0a !important;
+    border: 1px solid #1f1f1f;
+}
+
+/* FOOTER */
+body.dark-mode .footer-cta {
+    background: #000 !important;
+}/* BACK BUTTON IN DARK MODE */
+body.dark-mode .back-btn {
+    color: #ffffff !important;
+}
+
+/* OPTIONAL: ICON ALSO WHITE */
+body.dark-mode .back-btn span {
+    color: #ffffff !important;
+}body.dark-mode .back-btn:hover {
+    color: #3b82f6 !important;
 }
     </style>
 </head>
@@ -424,7 +478,18 @@ clients.forEach(c => {
     `;
 });
         }
-        
+    window.addEventListener("load", function () {
+  const theme = localStorage.getItem("theme");
+
+  if (theme === "dark") {
+    document.body.classList.add("dark-mode");
+  } else {
+    document.body.classList.remove("dark-mode");
+  }
+});function toggleMenu(event) {
+    event.stopPropagation();
+    document.getElementById('navMenu').classList.toggle('active');
+}
     </script>
 </body>
 </html>

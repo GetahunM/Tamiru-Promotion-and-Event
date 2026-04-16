@@ -59,7 +59,146 @@ header, main {
     max-width: calc(100vw - 20px);
 }
         .entrance-curtain.hide { transform: translateX(100%); }
-    </style>
+       
+/* =========================
+   BASE DARK MODE (MAIN FIX)
+   ========================= */
+body.dark-mode {
+    background: #0b1220 !important;
+    color: #e5e7eb !important;
+    transition: all 0.3s ease;
+}
+
+/* =========================
+   HEADER + NAVBAR
+   ========================= */
+body.dark-mode header,
+body.dark-mode .navbar {
+    background: #000 !important;
+}
+
+/* =========================
+   HAMBURGER / NAV MENU
+   ========================= */
+body.dark-mode nav {
+    background: rgba(0,0,0,0.95) !important;
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease-in-out;
+}
+
+/* NAV LINKS */
+body.dark-mode nav a {
+    color: #ffffff !important;
+    display: block;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+}
+
+/* NAV HOVER */
+body.dark-mode nav a:hover {
+    background: #111;
+    color: #3b82f6 !important;
+    border-radius: 6px;
+}
+
+/* =========================
+   BOOKING FORM CONTAINER
+   ========================= */
+body.dark-mode .booking-container,
+body.dark-mode .form-container,
+body.dark-mode .booking-box,
+body.dark-mode form {
+    background: #000 !important;
+    border: 1px solid #1a1a1a;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+    border-radius: 12px;
+}
+
+/* =========================
+   FORM SECTIONS (LAYERS)
+   ========================= */
+body.dark-mode .form-group,
+body.dark-mode .input-group,
+body.dark-mode .form-section {
+    background: #0a0a0a !important;
+    border: 1px solid #1f1f1f;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+/* =========================
+   INPUT FIELDS (FAQ STYLE)
+   ========================= */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+    background: #12264d !important; /* FAQ-style dark blue */
+    color: #e5e7eb !important;
+    border: 1px solid #1f2937;
+    border-radius: 8px;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+/* INPUT FOCUS */
+body.dark-mode input:focus,
+body.dark-mode textarea:focus,
+body.dark-mode select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 12px rgba(59,130,246,0.4);
+    outline: none;
+}
+
+/* PLACEHOLDER */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #94a3b8 !important;
+}
+
+/* =========================
+   BUTTONS (OPTIONAL CLEAN)
+   ========================= */
+body.dark-mode button,
+body.dark-mode .btn-primary {
+    background: #3b82f6 !important;
+    color: #fff !important;
+    border: none;
+}/* BASE DROPDOWN (LIGHT + DARK READY) */
+.nav-dropdown {
+    opacity: 0;
+    transform: translateY(-12px);
+    pointer-events: none;
+
+    transition: all 0.35s ease;
+}
+
+/* ACTIVE OPEN STATE */
+.nav-dropdown.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* DARK MODE DROPDOWN */
+body.dark-mode #navMenu {
+    background: rgba(0,0,0,0.98) !important;
+    backdrop-filter: blur(14px);
+    border: 1px solid #1f1f1f;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+    border-radius: 16px;
+}
+  body.dark-mode #navMenu a {
+    color: #ffffff !important;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+/* hover effect */
+body.dark-mode #navMenu a:hover {
+    background: #111827;
+    color: #3b82f6 !important;
+    transform: translateX(5px);
+}  </style>
 </head>
 <body class="text-slate-900">
 
@@ -237,6 +376,21 @@ header, main {
 
         document.getElementById('guestInput').addEventListener('input', calculate);
         updateEvent('wedding');
+        window.addEventListener("DOMContentLoaded", function () {
+    const theme = localStorage.getItem("theme");
+
+    if (theme === "dark") {
+        document.body.classList.add("dark-mode");
+    } else {
+        document.body.classList.remove("dark-mode");
+    }
+});document.addEventListener('click', (e) => {
+    const menu = document.getElementById('navMenu');
+
+    if (!menu.contains(e.target)) {
+        menu.classList.remove('active');
+    }
+});
     </script>
 </body>
 </html>

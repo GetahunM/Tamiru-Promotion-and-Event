@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery | Tamiru Promotion</title>
-
+<script>
+(function () {
+    const theme = localStorage.getItem("theme");
+    if (theme === "dark") {
+        document.documentElement.classList.add("dark-mode");
+    }
+})();
+</script>
     <style>
         :root {
            color: #1e2a78;
@@ -22,8 +29,33 @@
         body {
             background: var(--bg-light);
             color: #333;
-            min-width: 1200px;
-        }
+         
+ 
+   html, body {
+    overflow-x: hidden;
+}
+
+/* desktop stays same */
+
+    min-width: 1200px;
+
+/* mobile override */
+@media (max-width: 768px) {
+    body {
+        min-width: 100%;
+    }
+
+    .container {
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    .media-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+}
+        
 
         .top-bar {
             width: 100%;
@@ -84,10 +116,12 @@
             border-radius: 0 50px 50px 0;
         }
 
-        .container {
-            width: 1200px;
-            margin: 40px auto;
-        }
+       .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 15px;
+}
 
         .media-grid {
             display: grid;
@@ -163,12 +197,79 @@
   user-select: none;
   padding: 10px;
 }
-    
+/* =========================
+   DARK MODE FOR GALLERY
+   ========================= */
+
+.dark-mode body {
+    background: #0b1220 !important;
+    color: #e5e7eb !important;
+}
+
+/* TOP BAR */
+.dark-mode .top-bar {
+    background: #000 !important;
+    border-bottom: 1px solid #1f2937;
+}
+
+/* BACK BUTTON (WHITE LIKE YOU WANT) */
+body.dark-mode .back-home {
+    color: #ffffff !important;
+}
+
+/* HEADER */
+body.dark-mode .gallaar {
+    background: #000 !important;
+}
+
+body.dark-mode .our {
+    color: #e5e7eb !important;
+}
+
+/* TABS */
+body.dark-mode .tab-btn {
+    border-color: #c5a059;
+    color: #c5a059;
+}
+
+body.dark-mode .tab-btn.active {
+    background: #c5a059;
+    color: #000;
+}
+
+/* MEDIA ITEMS */
+body.dark-mode .media-item {
+    background: #111 !important;
+}
+
+/* ACTION BAR */
+body.dark-mode .extra-action-bar {
+    background: #000 !important;
+    border-top: 5px solid #ff7a00;
+    color: #e5e7eb;
+}
+
+/* LIGHTBOX */
+body.dark-mode .lightbox {
+    background: rgba(0,0,0,0.95);
+}
+
+/* CLOSE / ARROWS */
+body.dark-mode .lightbox span {
+    color: #ffffff !important;
+}  .dark-mode .cta-button {
+    background: #3b82f6 !important;
+    color: #ffffff !important;
+}
+
+.dark-mode .cta-button:hover {
+    background: #2563eb !important;
+}  
     </style>
 </head>
 
 <body>
-
+<div class="container" id="gallery-section"></div>
 <div class="top-bar">
     <a href="index.html" class="back-home">❮ RETURN TO HOME</a>
 </div>
@@ -333,48 +434,59 @@
 </div>
 
 <script>
-    const photos = [
-        'images/stage1.jpg',
-        'images/stage3.jpg',
-        'images/education7.jpg',
-        'images/eeducation4.jpg',
-        'images/wed7.jpg'
-    ];
+   const photos = [
+    'images/stage1.jpg',
+    'images/stage3.jpg',
+    'images/education7.jpg',
+    'images/eeducation4.jpg',
+    'images/wed7.jpg'
+];
 
-    let photoData = [];
-    let currentIndex = 0;
+let photoData = [];
+let currentIndex = 0;
 
-    function initGallery() {
-        const pGrid = document.getElementById('photo-grid');
+/* =========================
+   INIT GALLERY
+========================= */
+function initGallery() {
+    const pGrid = document.getElementById('photo-grid');
 
-        for (let i = 0; i < 40; i++) {
-            let src = photos[i % photos.length];
-            photoData.push(src);
+    for (let i = 0; i < 40; i++) {
+        let src = photos[i % photos.length];
+        photoData.push(src);
 
-           pGrid.innerHTML += `
-    <div class="media-item">
-        <img src="${src}" onclick="openLightbox(${i})">
-    </div>`;
-        }
+        pGrid.innerHTML += `
+            <div class="media-item">
+                <img src="${src}" onclick="openLightbox(${i})">
+            </div>
+        `;
     }
+}
 
-    function switchTab(type) {
-        const photo = document.getElementById('photo-grid');
-        const video = document.getElementById('video-grid');
-        const btns = document.querySelectorAll('.tab-btn');
+/* =========================
+   SWITCH TAB (PHOTO / VIDEO)
+========================= */
+function switchTab(type) {
+    const photo = document.getElementById('photo-grid');
+    const video = document.getElementById('video-grid');
+    const btns = document.querySelectorAll('.tab-btn');
 
-        if (type === 'photo') {
-            photo.style.display = 'grid';
-            video.style.display = 'none';
-            btns[0].classList.add('active');
-            btns[1].classList.remove('active');
-        } else {
-            photo.style.display = 'none';
-            video.style.display = 'grid';
-            btns[1].classList.add('active');
-            btns[0].classList.remove('active');
-        }
+    if (type === 'photo') {
+        photo.style.display = 'grid';
+        video.style.display = 'none';
+        btns[0].classList.add('active');
+        btns[1].classList.remove('active');
+    } else {
+        photo.style.display = 'none';
+        video.style.display = 'grid';
+        btns[1].classList.add('active');
+        btns[0].classList.remove('active');
     }
+}
+
+/* =========================
+   LIGHTBOX
+========================= */
 function openLightbox(index) {
     currentIndex = index;
     document.getElementById('lb-img').src = photoData[currentIndex];
@@ -393,12 +505,51 @@ function changeSlide(step) {
 
     document.getElementById('lb-img').src = photoData[currentIndex];
 }
-document.addEventListener("click", function(e) {
+
+/* =========================
+   VIDEO PLAY / PAUSE
+========================= */
+document.addEventListener("click", function (e) {
     if (e.target.tagName === "VIDEO") {
         e.target.paused ? e.target.play() : e.target.pause();
     }
 });
-    window.onload = initGallery;
+
+/* =========================
+   THEME (DARK MODE SYNC)
+========================= */
+function applyTheme() {
+    const theme = localStorage.getItem("theme");
+
+    if (theme === "dark") {
+        document.body.classList.add("dark-mode");
+    } else {
+        document.body.classList.remove("dark-mode");
+    }
+}
+
+/* =========================
+   SMART PAGE LOAD (NO FLASH + AUTO SCROLL)
+========================= */
+document.addEventListener("DOMContentLoaded", function () {
+
+    initGallery();
+    applyTheme();
+
+    // force scroll to gallery instantly if coming from button
+    const goToGallery = () => {
+        const target = document.getElementById("photo-grid");
+        if (target) {
+            target.scrollIntoView({ block: "start", behavior: "auto" });
+        }
+    };
+
+    if (window.location.hash === "#gallery-section") {
+        requestAnimationFrame(() => {
+            requestAnimationFrame(goToGallery);
+        });
+    }
+});
 </script>
 
 </body>
