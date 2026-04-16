@@ -12,27 +12,34 @@
   --font-normal: 16px;
 }
 p {
-  font-size: 18px;          /* 🔥 bigger text */
-  line-height: 1.8;         /* 🔥 more spacing between lines */
-  color: rgba(0,0,0,0.9);   /* 🔥 darker text (more visible) */
+  font-size: 17px;
+  line-height: 1.9;
+  color: rgba(0,0,0,0.75);
+}
+section {
+  padding: 80px 0;
 }
 body {
-  font-size: var(--font-normal);
-  line-height: 1.6;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #1a1a1a;
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 42px;
   font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 h2 {
-  font-size: 26px;
+  font-size: 32px;
   font-weight: 600;
+  letter-spacing: -0.3px;
 }
 
 h3 {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 500;
 }
     /* 1. REMOVE ALL EXTERNAL GAPS AND MOVEMENT */
@@ -165,10 +172,15 @@ gap: 180px !important;
   padding-right: 0;
 }
 @media (max-width: 768px) {
-  .service-boxes {
-    grid-template-columns: 1fr !important;
-    padding-left: 20px !important;
-    padding-right: 20px !important;
+  p {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .card p,
+  .service-box p,
+  .testimonial-card p {
+    font-size: 16px;
   }
 }
 /* --- THE INDIVIDUAL CARD --- */
