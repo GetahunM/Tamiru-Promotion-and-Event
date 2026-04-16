@@ -9,13 +9,42 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-  --font-normal: 16px;
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --card: #f8f9fa;
+  --primary: #1f4391;
 }
+
+/* DARK MODE */
+body.dark-mode {
+  --bg: #0f172a;
+  --text: #e5e7eb;
+  --card: #1e293b;
+  --primary: #3b82f6;
+}
+
+/* APPLY COLORS */
+
+
+/* IMPORTANT ELEMENTS */
+
+.card,
+.service-box,
+.testimonial-card,
+.gallery-item {
+  background: var(--card);
+  color: var(--text);
+}
+
 p {
+  color: var(--text);
   font-size: 17px;
   line-height: 1.9;
-  color: rgba(0,0,0,0.75);
 }
+  :root {
+  --font-normal: 16px;
+}
+
 section {
   padding: 80px 0;
 }
@@ -51,22 +80,29 @@ h3 {
         overflow-x: hidden; /* STOPS LEFT-RIGHT SHIFTING */
         position: relative;
     }
-
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  line-height: 1.8;
+}
     /* 2. PIN THE HEADER (STOPS TOP MOVEMENT) */
-    header { 
-        position: sticky; 
-        top: 0; 
-        left: 0;
-        width: 100%;
-        height: 90px;
-        z-index: 2000; 
-        background: rgb(31, 67, 145);
-        backdrop-filter: blur(10px);
-        display: flex;
-        justify-content: center;
-        /* Remove margin/padding to ensure it touches the top edge */
-        margin: 0 !important; 
-    }
+ header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  z-index: 2000;
+  background: var(--primary);
+  transition: background 0.3s ease;
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  margin: 0 !important;
+}
 
     .navbar {
         width: 1200px;
@@ -90,7 +126,14 @@ h3 {
         width: 100%;
         overflow: hidden;
     }
-
+.card,
+.service-box,
+.testimonial-card,
+.gallery-item {
+  background: var(--card);
+  color: var(--text);
+  transition: all 0.3s ease;
+}
     /* 4. LOCK INTERNAL CONTAINERS */
     .container, 
     .about-container, 
@@ -439,6 +482,159 @@ font-weight: 600;
     font-size: 14px;
   }
 }
+body.dark-mode {
+  --bg: #000000;          /* pure black background */
+  --text: #e5e7eb;        /* soft white text */
+  --card: #111111;        /* dark card */
+  --primary: #3b82f6;     /* blue main color */
+  --accent: #3b82f6;      /* ALL orange replaced with blue */
+}
+/* =========================
+   DARK MODE OVERRIDE ONLY
+   ========================= */
+
+body.dark-mode {
+  background: #000000 !important;
+  color: #e5e7eb !important;
+}
+body.dark-mode .btn-primary,
+body.dark-mode .btn,
+body.dark-mode #backToTop,
+body.dark-mode button {
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+  color: #ffffff !important;
+}
+body.dark-mode {
+  background: #000 !important;
+  color: #e5e7eb !important;
+  transition: all 0.4s ease-in-out;
+}
+/* override inline or fixed orange colors (best effort) */
+body.dark-mode * {
+  transition: all 0.3s ease-in-out;
+}
+
+/* catch ALL orange colors */
+body.dark-mode [style*="#ea580c"],
+body.dark-mode [style*="#ff7a00"],
+body.dark-mode span,
+body.dark-mode h1 span,
+body.dark-mode h2 span,
+body.dark-mode h3 span {
+  color: #3b82f6 !important;
+}
+body.dark-mode button,
+body.dark-mode .btn-primary,
+body.dark-mode .btn-outline,
+body.dark-mode .watch-more-btn,
+body.dark-mode .view-more-btn,
+body.dark-mode #backToTop {
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+  color: #ffffff !important;
+}
+body.dark-mode p {
+  color: #d1d5db !important;
+  opacity: 0.95;
+}
+body.dark-mode .about,
+body.dark-mode .about-container {
+  background: #000 !important;
+}
+body.dark-mode .about-container,
+body.dark-mode .why-container-wrapper,
+body.dark-mode .faq-container,
+body.dark-mode .services-container {
+  background: transparent !important;
+}
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode p,
+body.dark-mode li {
+  color: #e5e7eb !important;
+}
+body.dark-mode .faq-item {
+  background: #12264d !important;
+  border-radius: 10px;
+}
+
+body.dark-mode .faq-question {
+  color: #e5e7eb !important;
+}
+body.dark-mode .why-us {background: #000 !important;}
+body.dark-mode .faq,
+body.dark-mode .services,
+body.dark-mode .events,
+body.dark-mode .testimonials,
+body.dark-mode .gallery-section {
+  background: #0b1b3a !important;  /* DARK BLUE */
+  color: #e5e7eb !important;
+  transition: all 0.4s ease-in-out;
+}
+body.dark-mode .about-content {
+  color: #e5e7eb !important;
+}
+body.dark-mode .card,
+body.dark-mode .service-box,
+body.dark-mode .testimonial-card {
+  background: #111 !important;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+}.faq-answer {
+  background: var(--card);
+  color: var(--text);
+  transition: all 0.3s ease;
+  padding: 15px;
+  border-radius: 8px;
+}
+body.dark-mode .faq-answer {
+  background: #0f172a;   /* slightly lighter than pure black */
+  color: #e5e7eb;        /* soft white */
+  border-left: 3px solid #3b82f6; /* blue highlight */
+}
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  opacity: 0;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 200px;
+  opacity: 1;
+  padding: 15px;
+}
+.faq-icon {
+  color: #ffffff !important;
+  font-size: 20px;
+  font-weight: bold;
+}body.dark-mode .faq-question {
+  background: #1f4391 !important;
+  color: #ffffff !important;
+}.dark-toggle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}.dark-toggle:hover {
+  transform: scale(1.1);
+  background: var(--primary);
+  border-color: var(--primary);
+}
 </style></head>
 
 <body><div id="loader">
@@ -462,6 +658,7 @@ font-weight: 600;
       <button class="btn-outline" onclick="location.href='book.html'">Booking</button>
       <button class="btn-primary" onclick="window.location.href='#events'">Events</button>
     </div>
+    <button onclick="toggleDarkMode()" class="dark-toggle">🌙</button>
   </div>
 </header>
 
@@ -882,7 +1079,24 @@ window.addEventListener("load", function () {
         document.getElementById("loader").classList.add("hidden");
     }, 3000); // 👈 3 seconds loading
 });
+function toggleDarkMode() {
+  document.body.classList.toggle("dark-mode");
 
+  if (document.body.classList.contains("dark-mode")) {
+    localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
+  }
+}
+function toggleDarkMode() {
+  document.body.classList.toggle("dark-mode");
+
+  if (document.body.classList.contains("dark-mode")) {
+    localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
+  }
+}
 </script>
 </body>
 </html>
