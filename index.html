@@ -11,7 +11,11 @@
   :root {
   --font-normal: 16px;
 }
-
+p {
+  font-size: 18px;          /* 🔥 bigger text */
+  line-height: 1.8;         /* 🔥 more spacing between lines */
+  color: rgba(0,0,0,0.9);   /* 🔥 darker text (more visible) */
+}
 body {
   font-size: var(--font-normal);
   line-height: 1.6;
@@ -312,13 +316,22 @@ letter-spacing: 0.3px;
     color: #ffffff;
 }
 
-
-.site-end-section p,
+.site-end-section p {
+  color: rgba(255,255,255,0.9) !important;
+  font-size: 17px;
+  line-height: 1.7;
+}
 .site-end-section a,
 .site-end-section h3 {
     color: #ffffff !important;
 }
-
+.card p,
+.service-box p,
+.testimonial-card p,
+.faq-answer p {
+  font-size: 17px;
+  line-height: 1.7;
+}
 /* specifically target contact block */
 .contact-text-group p {
     color: #ffffff !important;
