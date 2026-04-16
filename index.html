@@ -6,13 +6,37 @@
 
   <title>Tamiru Promotions | Excellence in Events</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  :root {
+  --font-normal: 16px;
+}
+
+body {
+  font-size: var(--font-normal);
+  line-height: 1.6;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 500;
+}
     /* 1. REMOVE ALL EXTERNAL GAPS AND MOVEMENT */
     html, body {
         margin: 0 !important;
         padding: 0 !important;
         width: 100%;
-        min-width: 1200px; /* Maintains your desktop structure */
+       min-width: 100%; /* Maintains your desktop structure */
         overflow-x: hidden; /* STOPS LEFT-RIGHT SHIFTING */
         position: relative;
     }
@@ -218,6 +242,8 @@ gap: 180px !important;
 }
 
 /* --- THE INNER GRID (Centered) --- */
+
+/* --- THE INNER GRID (Centered) --- */
 .master-footer-grid {
     width: 1200px !important;
     margin: 0 auto !important;
@@ -248,7 +274,9 @@ gap: 180px !important;
 .footer-nav-list a {
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-    font-size: 15px;
+ font-size: 14px;
+font-weight: 400;
+letter-spacing: 0.3px;
     transition: all 0.3s ease-in-out;
     display: inline-block;
 }
@@ -312,7 +340,9 @@ gap: 180px !important;
     
     border-top-left-radius: 100% 60px;
     border-top-right-radius: 100% 60px;
+    z-index: -1;
 }
+
 .site-end-section {
     background: linear-gradient(
         to bottom,
@@ -329,7 +359,13 @@ html {
     transform: translateY(40px);
     transition: all 0.8s ease;
 }
-
+.footer-title-sub {
+    color: #ff7a00;
+    margin: 20px 0;  /* top & bottom spacing */
+   font-size: 18px;
+font-weight: 600;
+    text-transform: uppercase;
+}
 .fade-in.show {
     opacity: 1;
     transform: translateY(0);
@@ -360,6 +396,23 @@ html {
   
   border-top-left-radius: 100% 80px;
   border-top-right-radius: 100% 80px;
+}
+@media (max-width: 768px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  p {
+    font-size: 14px;
+  }
 }
 </style></head>
 
