@@ -15,38 +15,44 @@
 header {
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100%; /* Keeps the background stretching edge-to-edge */
   z-index: 2000;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Professional "Smoothness" */
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(23, 40, 151, 0.9); /* Move background here from .navbar */
+  backdrop-filter: blur(10px);
 }
-
 /* THE NAVBAR DESIGN */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* Deep Blue with a bit of transparency for the 'Smooth' feel */
-  background: rgba(23, 40, 151, 0.9); 
+  /* FIX: Lock the width to match your sections */
+  width: 1200px !important; 
+  margin: 0 auto !important; /* This centers the links on your laptop */
+  
   color: white;
-  padding: 0 50px;
+  padding: 0 20px; /* Reduced padding since width is now fixed */
   height: 90px;
-  backdrop-filter: blur(10px); /* Frosted Glass Effect */
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.5s ease;
+  background: transparent !important; /* Make this transparent so the header color shows */
 }
 
 /* WHEN YOU SCROLL DOWN */
-header.scrolled .navbar {
-  height: 70px; /* Becomes thinner and sleeker */
-  background: rgba(30, 42, 120, 0.98); /* Becomes more solid */
+header.scrolled {
+  background: rgba(30, 42, 120, 0.98);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
+header.scrolled .navbar {
+  height: 70px;
+}
 /* LOGO IMAGE SMOOTHNESS */
 .logo-img {
   height: 65px;
   transition: height 0.5s ease;
   display: block;
+  
 }
 
 header.scrolled .logo-img {

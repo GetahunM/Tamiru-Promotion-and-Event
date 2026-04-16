@@ -6,67 +6,171 @@
 
   <title>Tamiru Promotions | Excellence in Events</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
-    /*STOP SIDE-SCROLLING AND SWIPING BETWEEN PARTS */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    /* This 'spacer' ensures your text starts BELOW the blue bar */
-    padding-top: 90px; 
-}
-.main-content {
-    flex: 1;
-}
-/* Ensure the body takes up the full screen so footer can sit at the bottom */
-/* This pushes the footer to the absolute bottom of the page */
-#contact {
-    margin-top: auto !important;
-}
-/* This pushes the footer to the bottom if content is short */
-
-/* Force the entrance curtain to stop existing once it slides away */
-.entrance-curtain.hide {
-    transform: translateX(100%);
-    visibility: hidden; /* This prevents it from being "scrolled into" */
-    pointer-events: none;
-}
-
-/* Ensure no section is wider than the viewport */
-section {
-    width: 100%;
-    max-width: 100vw;
-    /* Removed overflow: hidden so it doesn't fight with the navbar */
-}
-    .transition-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: #ea580c;
-      z-index: 9999;
-      transform: translateX(-100%);
-      transition: transform 0.5s ease-in-out;
+<style>
+    /* 1. REMOVE ALL EXTERNAL GAPS AND MOVEMENT */
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100%;
+        min-width: 1200px; /* Maintains your desktop structure */
+        overflow-x: hidden; /* STOPS LEFT-RIGHT SHIFTING */
+        position: relative;
     }
-    .transition-overlay.active { transform: translateX(0); }
 
-    /* STEP 1a: STICKY NAVBAR */
-   header {
-  position: fixed; /* Fixes the 'disappearing' issue on mobile */
-  top: 0;
-  left: 0;
-  width: 100%; 
-  z-index: 9999; /* Tells the phone this is the top layer */
-  background: white;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    /* 2. PIN THE HEADER (STOPS TOP MOVEMENT) */
+    header { 
+        position: sticky; 
+        top: 0; 
+        left: 0;
+        width: 100%;
+        height: 90px;
+        z-index: 2000; 
+        background: rgb(31, 67, 145);
+        backdrop-filter: blur(10px);
+        display: flex;
+        justify-content: center;
+        /* Remove margin/padding to ensure it touches the top edge */
+        margin: 0 !important; 
+    }
+
+    .navbar {
+        width: 1200px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    /* 3. STABILIZE MAIN CONTENT */
+    .main-content {
+        margin-top: 0 !important; /* Prevents white gap at the top */
+        width: 100%;
+    }
+
+    /* Ensure the Hero section touches the Header exactly */
+    .hero {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    /* 4. LOCK INTERNAL CONTAINERS */
+    .container, 
+    .about-container, 
+    .services-container, 
+    .why-container-wrapper,
+    .faq-container,
+    .gallery-container,
+    .service-boxes, 
+    .cards, 
+    .testimonial-cards {
+        width: 1200px !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+    }
+.testimonial-img {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 20px auto 10px auto;
+    border: 3px solid #ff7a00;
+    padding: 3px;
+    background: white;
 }
-    /* STEP 1b: BACK TO TOP BUTTON CSS */
-    #backToTop {
+    /* 5. FIX FOOTER ALIGNMENT */
+    .site-end-section {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        position: relative;
+        left: 0;
+    }
+
+    .master-footer-grid {
+        width: 1200px !important;
+        margin: 0 auto !important;
+    }
+
+    /* 6. HIDE TRANSITION OVERLAY GAPS */
+    .transition-overlay {
+        display: none; /* Temporarily hiding to ensure no movement disruption */
+    }
+    /* --- THE 3-CARD GRID CONTAINER --- */
+.service-boxes, .cards, .testimonial-cards {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important; 
+gap: 180px !important;
+    width: 1200px !important;
+    padding: 40px 30px !important; 
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    flex-shrink: 0 !important;
+
+    justify-items: center !important;
+    justify-content: center !important; /* ✅ ADD THIS */
+}
+
+@media (max-width: 768px) {
+  .service-boxes,
+  .cards,
+  .testimonial-cards {
+    grid-template-columns: 1fr !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+.services, .events, .testimonials {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 !important;
+}
+.services {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+@media (max-width: 768px) {
+  .service-boxes {
+    grid-template-columns: 1fr !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+/* --- THE INDIVIDUAL CARD --- */
+.service-boxes,
+.cards,
+.testimonial-cards {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 40px !important;
+  width: 1200px;
+  margin: 0 auto;
+}
+.service-box,
+.card,
+.testimonial-card {
+  width: 100%;
+}
+/* --- IMAGE & CONTENT (REMAINS SAME) --- */
+.service-box img, .card img, .testimonial-card img {
+    width: 100% !important;
+    height: 230px !important;
+    object-fit: cover;
+    display: block;
+}
+
+.card-body, .service-content {
+    padding: 20px;
+    text-align: center;
+}
+   #backToTop {
       position: fixed;
       bottom: 30px;
       right: 30px;
@@ -85,70 +189,32 @@ section {
       transition: 0.3s;
     }
     #backToTop:hover { transform: scale(1.1); background-color: #c2410c; }
-
-    /* UNIFIED CARD ALIGNMENT LOGIC */
-    /* --- UNIVERSAL RESET FOR ACCURATE SIZING --- */
-/* --- FIXED 3-COLUMN GRID (NO HORIZONTAL SCROLL) --- */
-/* --- FIXED 3-COLUMN GRID (NO HORIZONTAL SCROLL) --- */
-/* --- THE MASTER WRAPPER FIX --- */
-.container, .wrapper {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    box-sizing: border-box;
+    #loader {
+    position: fixed;
+    inset: 0;
+    background: #1f4391;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
 }
 
-/* --- THE 3-CARD GRID (ZERO HORIZONTAL SCROLL) --- */
-.service-boxes, .cards, .testimonial-cards {
-    display: grid !important;
-    /* This divides 1200px into 3 exact columns minus the 20px gaps */
-    grid-template-columns: repeat(3, 1fr) !important; 
-    gap: 20px;
- max-width: 1200px !important;
-width: 100% !important;
-    margin: 0 auto !important;
-    padding: 40px 0 !important;
-    
-    /* Disables all side movement */
-    overflow-x: hidden !important; 
-    overflow-y: visible !important;
-    box-sizing: border-box !important;
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid #fff;
+    border-top: 6px solid #ff7a00;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
 }
 
-/* --- UNIFIED CARD SIZE --- */
-.service-box, .card, .testimonial-card {
-    width: 100% !important; /* Automatically becomes ~386px */
-    background: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    box-sizing: border-box !important;
-    overflow: hidden;
+@keyframes spin {
+    0% { transform: rotate(0); }
+    100% { transform: rotate(360deg); }
 }
 
-/* --- IMAGE FIX --- */
-.service-box img, .card img, .testimonial-card img {
-    width: 100%;
-    height: 230px;
-    object-fit: cover;
-}
-    .btn-primary {
-      width: fit-content;
-      align-self: center;
-    }
-    
-
-/* 1. THE OUTER BOX: Make the Blue go edge-to-edge */
-/* --- FOOTER OUTER (Full Width & Smooth Dark) --- */
-/* --- THE OUTER FOOTER (Full Width & Dark) --- */
-.site-end-section {
-    background: linear-gradient(180deg, #131b4d 0%, #0a0e29 100%) !important; /* Deep Dark Blue */
-    width: 100vw !important;
-    position: relative;
-    left: 50%;
-    margin-left: -50vw !important;
-    padding: 60px 0 0 0;
-    border-top: 4px solid #ff7a00; /* Your Brand Orange */
-    color: white;
+#loader.hidden {
+    display: none;
 }
 
 /* --- THE INNER GRID (Centered) --- */
@@ -214,8 +280,26 @@ width: 100% !important;
 }
 .site-end-section {
     position: relative;
+    background: #1f4391; /* ensure dark background */
+    color: #ffffff;
 }
 
+
+.site-end-section p,
+.site-end-section a,
+.site-end-section h3 {
+    color: #ffffff !important;
+}
+
+/* specifically target contact block */
+.contact-text-group p {
+    color: #ffffff !important;
+}
+
+/* footer bottom text */
+.legal-bottom-bar p {
+    color: #ffffff !important;
+}
 /* SMOOTH CURVE */
 .site-end-section::before {
     content: "";
@@ -277,10 +361,11 @@ html {
   border-top-left-radius: 100% 80px;
   border-top-right-radius: 100% 80px;
 }
-  </style>
-</head>
+</style></head>
 
-<body>
+<body><div id="loader">
+  <div class="spinner"></div>
+</div>
 <div class="main-content">
 <header id="mainHeader">
   <div class="navbar">
@@ -306,8 +391,8 @@ html {
 
 <button id="backToTop" onclick="scrollToTop()">↑</button>
 
-<section class="hero" id="home">
-  <div class="overlay">
+<section class="hero" id="home" style="margin-top: 0px  ;">
+  <div class="overlay" >
     <h3>To Make Your Events Amazing</h3>
     <h1><span>Tamiru Promotion & Event</span></h1>
     <h3>is the First Choice!</h3>
@@ -434,37 +519,27 @@ html {
 
 <section class="testimonials">
   <h2 class="section-title">Testimonials</h2>
+<div class="testimonial-cards">
 
-  <div class="testimonial-cards">
-
-    <div class="testimonial-card">
-      <img src="images/wedding5.jpg" alt="Kelebet"
-        style="width: 80px; height: 80px; border-radius: 50%; margin: 20px auto 0;">
-      <h3 style="text-align: center;">Kelebet Misganaw</h3>
-      <p style="text-align: center;">
-        "The wedding planning team went above and beyond. Everything was perfect!"
-      </p>
-    </div>
-
-    <div class="testimonial-card">
-      <img src="images/testimonals4.jpg" alt="Getahun"
-        style="width: 80px; height: 80px; border-radius: 50%; margin: 20px auto 0;">
-      <h3 style="text-align: center;">Getahun Misganaw</h3>
-      <p style="text-align: center;">
-        "Highly professional and organized. They made our gala unforgettable!"
-      </p>
-    </div>
-
-    <div class="testimonial-card">
-      <img src="images/wedding1.jpg" alt="Abebe"
-        style="width: 80px; height: 80px; border-radius: 50%; margin: 20px auto 0;">
-      <h3 style="text-align: center;">Abebe Kebede</h3>
-      <p style="text-align: center;">
-        "Amazing stage setup and sound quality. Top-tier production!"
-      </p>
-    </div>
-
+  <div class="testimonial-card">
+    <img class="testimonial-img" src="images/wedding5.jpg" alt="Kelebet">
+    <h3>Kelebet Misganaw</h3>
+    <p>"The wedding planning team went above and beyond. Everything was perfect!"</p>
   </div>
+
+  <div class="testimonial-card">
+    <img class="testimonial-img" src="images/testimonals4.jpg" alt="Getahun">
+    <h3>Getahun Misganaw</h3>
+    <p>"Highly professional and organized. They made our gala unforgettable!"</p>
+  </div>
+
+  <div class="testimonial-card">
+    <img class="testimonial-img" src="images/wedding1.jpg" alt="Abebe">
+    <h3>Abebe Kebede</h3>
+    <p>"Amazing stage setup and sound quality. Top-tier production!"</p>
+  </div>
+
+</div>
 
   <!-- ✅ VIEW MORE BUTTON -->
   <a href="javascript:void(0)" 
@@ -607,7 +682,6 @@ html {
     <p>&copy; 2026 Tamiru Promotion & Event. All Rights Reserved.</p>
   </div>
 </footer>
-
 <script>
   // STEP 1: BUTTON LOGIC
   const topBtn = document.getElementById("backToTop");
@@ -723,6 +797,12 @@ window.addEventListener("load", function() {
             });
         };
     });
+});
+
+window.addEventListener("load", function () {
+    setTimeout(() => {
+        document.getElementById("loader").classList.add("hidden");
+    }, 3000); // 👈 3 seconds loading
 });
 
 </script>
